@@ -6,7 +6,6 @@
 }
 
 .active {
-  /* transform: translateX(-300px); */
   max-width: 0;
   overflow: hidden;
 }
