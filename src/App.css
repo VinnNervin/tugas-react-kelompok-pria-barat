@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: rgba(16, 24, 40, 1);
+  --color-secondary: rgba(30, 41, 57, 1);
+}
+
+.active {
+  /* transform: translateX(-300px); */
+  max-width: 0;
+  overflow: hidden;
+}
