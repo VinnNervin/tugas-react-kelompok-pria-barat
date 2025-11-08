@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Button, TextField } from "@mui/material";
 
 function Content({ sideBarState, setSideBarState, onFetchCity, weatherData }) {
   const searchInput = useRef("");
@@ -31,32 +33,43 @@ function Content({ sideBarState, setSideBarState, onFetchCity, weatherData }) {
     <main className="flex-1 p-6 md:p-10 bg-gray-900">
       <div className="flex flex-col md:flex-row justify-between items-center mb-10">
         <div className="w-full md:w-auto mb-4 md:mb-0">
-          <button
-            className="md:hidden hover:scale-125 transition-all duration-150 ease-in-out flex items-center justify-center hover:bg-primary rounded-lg "
+          <Button
+            sx={{
+              display: { sm: "none" },
+              padding: 0,
+            }}
             onClick={() => setSideBarState(!sideBarState)}
           >
-            <ion-icon name="menu" className="text-2xl"></ion-icon>
-          </button>
+            <MenuIcon />
+          </Button>
           <h1 className="text-3xl md:text-4xl font-bold">
             {weatherData?.name || "Silahkan cari nama kota "}
           </h1>
           <p className="text-gray-400">Rabu, 1 Oktober 2025</p>
         </div>
         <div className="w-full md:w-80">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Cari kota..."
-              ref={searchInput}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleFetch(searchInput.current.value);
-                  searchInput.current.value = "";
-                }
-              }}
-              className="w-full bg-gray-800 border border-gray-700 rounded-full py-3 pl-6 pr-14 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-            />
-          </div>
+          <TextField
+            variant="filled"
+            placeholder="Cari kota..."
+            inputRef={searchInput}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleFetch(searchInput.current.value);
+                if (searchInput.current) searchInput.current.value = "";
+              }
+            }}
+            fullWidth
+            sx={{
+              width: "100%",
+              "& .MuiFilledInput-root": {
+                backgroundColor: "#1f2937",
+              },
+              input: { color: "white", padding: "12px 14px", width: "100%" },
+              "& .MuiFilledInput-input::placeholder": {
+                color: "rgba(148,163,184,1)",
+              },
+            }}
+          />
         </div>
       </div>
 

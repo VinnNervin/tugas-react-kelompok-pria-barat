@@ -1,3 +1,6 @@
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import CloseIcon from "@mui/icons-material/Close";
+import "./menu-items.css";
 const Menu = ({
   title,
   items,
@@ -27,42 +30,24 @@ const Menu = ({
   const iconName = ICON[type] || ICON["menu"];
 
   return (
-    <div className="px-4 mb-8">
-      <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
-        {title || "Menu"}
-      </h2>
+    <div className="menu-root">
+      <h2 className="menu-title">{title || "Menu"}</h2>
       {items.map((item) => (
-        <div
-          key={item}
-          href="#"
-          className="flex items-center justify-between gap-3 p-2 rounded-lg w-full hover:bg-gray-700 transition-colors duration-200"
-        >
-          <button
-            onClick={() => ItemMainClick(item)}
-            className="flex w-full gap-2 items-center"
-          >
+        <div key={item} href="#" className="menu-item">
+          <button onClick={() => ItemMainClick(item)} className="menu-button">
             <ion-icon name={iconName} className="text-xl"></ion-icon>
             <span className="capitalize">{item}</span>
           </button>
-          <div className="flex justify-end items-center 0 flex-grow">
+          <div className="menu-actions">
             {type === "history" ? (
-              <ion-icon
-                className="text-xl"
-                name="heart-outline"
-                onClick={() => saveItem(item)}
-              ></ion-icon>
+              <FavoriteBorderIcon onClick={() => saveItem(item)} />
             ) : null}
-            <ion-icon
-              className="text-xl"
-              name="close-outline"
-              onClick={() => deleteItem(item)}
-            ></ion-icon>
+
+            <CloseIcon onClick={() => deleteItem(item)} />
           </div>
         </div>
       ))}
-      {items.length === 0 && (
-        <p className="text-gray-500">Tidak ada {title}.</p>
-      )}
+      {items.length === 0 && <p className="menu-empty">Tidak ada {title}.</p>}
     </div>
   );
 };

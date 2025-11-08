@@ -30,7 +30,7 @@ function App() {
       setWeatherData(response);
     } catch (error) {
       alert(error.message);
-      console.log(error);
+      console.error(error);
     }
   };
 
